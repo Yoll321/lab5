@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.23)
+set(PATCH_VERSION "1" CACHE STRING "Patch version provided by GitHub Actions")
 project(physics)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -40,3 +41,17 @@ target_compile_options(physics PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:/W4>
         $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic>
         )
+
+set(CPACK_PACKAGE_NAME "allocators")
+set(CPACK_PACKAGE_VENDOR "nom4")
+set(CPACK_PACKAGE_CONTACT "nom4@tpu.ru")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Alocators application")
+
+if(APPLE)
+    set(CPACK_GENERATOR "DragNDrop")
+elseif(UNIX)
+    set(CPACK_GENERATOR "DEB")
+    set(CPACK_DEBIAN_PACKAGE_MAINTAINER "nom4@tpu.ru")
+endif()
+
+include(CPack)
