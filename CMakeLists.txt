@@ -42,7 +42,7 @@ target_compile_options(physics PRIVATE
         $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic>
         )
 
-set(CPACK_PACKAGE_NAME "allocators")
+set(CPACK_PACKAGE_NAME "physics")
 set(CPACK_PACKAGE_VENDOR "nom4")
 set(CPACK_PACKAGE_CONTACT "nom4@tpu.ru")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Alocators application")
