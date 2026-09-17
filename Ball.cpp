@@ -1,6 +1,14 @@
 #include "Ball.hpp"
 #include <cmath>
 
+Ball::Ball(Point center, 
+           Velocity vel, 
+           double radius,
+           Color color,
+           bool isCollidable)
+    : velocity_(vel), center_(center), radius_(radius), 
+      color_(color), isCollidable_(isCollidable) {}
+
 /**
  * Задает скорость объекта
  * @param velocity новое значение скорости
@@ -13,8 +21,11 @@ void Ball::setVelocity(const Velocity& velocity) {
  * @return скорость объекта
  */
 Velocity Ball::getVelocity() const {
-    // TODO: место для доработки
     return velocity_;
+}
+
+bool Ball::isCollidable() const {
+    return isCollidable_;
 }
 
 /**
@@ -26,7 +37,7 @@ Velocity Ball::getVelocity() const {
  * @param painter контекст отрисовки
  */
 void Ball::draw(Painter& painter) const {
-    // TODO: место для доработки
+    painter.draw(center_, radius_, color_);
 }
 
 /**
@@ -61,5 +72,6 @@ double Ball::getRadius() const {
  * эквивалентна объему: PI * radius^3 * 4. / 3.
  */
 double Ball::getMass() const {
-    return M_PI * radius_ * 4. / 3;
+    double res = M_PI * std::pow(radius_, 3) * 4. / 3;
+    return res;
 }

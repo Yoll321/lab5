@@ -1,5 +1,6 @@
 #pragma once
 #include <cmath>
+#include <fstream>
 
 class Point {
   public:
@@ -7,6 +8,8 @@ class Point {
     inline Point(double x, double y) : x{x}, y{y} {};
     double x{};
     double y{};
+
+    friend std::ifstream& operator>>(std::ifstream &in, Point &point);
 };
 
 inline Point operator-(const Point& lhs, const Point& rhs) {
@@ -28,4 +31,9 @@ inline Point operator/(const Point& p, double scalar) {
 inline double distance2(const Point& lhs, const Point& rhs) {
     const Point delta = lhs - rhs;
     return delta.x * delta.x + delta.y * delta.y;
+}
+
+inline std::ifstream& operator>>(std::ifstream &in, Point &point) {
+    in >> point.x >> point.y;
+    return in;
 }

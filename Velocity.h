@@ -27,6 +27,13 @@ class Velocity {
         return vec;
     }
 
+    friend std::ifstream& operator>>(std::ifstream& in, Velocity& vel);
+
   private:
     Point vec;
 };
+
+inline std::ifstream& operator>>(std::ifstream& in, Velocity& vel) {
+    in >> vel.vec.x >> vel.vec.y;
+    return in;
+}

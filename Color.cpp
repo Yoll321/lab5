@@ -16,3 +16,8 @@ double Color::green() const {
 double Color::blue() const {
     return b;
 }
+
+std::ifstream& operator>>(std::ifstream& in, Color& color) {
+    in >> color.r >> color.g >> color.b;
+    return in;
+}

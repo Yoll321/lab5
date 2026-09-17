@@ -38,6 +38,7 @@ void Physics::collideBalls(std::vector<Ball>& balls) const {
 
 void Physics::collideWithBox(std::vector<Ball>& balls) const {
     for (Ball& ball : balls) {
+        if (!ball.isCollidable()) continue;
         const Point p = ball.getCenter();
         const double r = ball.getRadius();
         // определяет, находится ли v в диапазоне (lo, hi) (не включая границы)
@@ -67,6 +68,7 @@ void Physics::move(std::vector<Ball>& balls) const {
 
 void Physics::processCollision(Ball& a, Ball& b,
                                double distanceBetweenCenters2) const {
+    if (!a.isCollidable() || !b.isCollidable()) return;
     // нормированный вектор столкновения
     const Point normal =
         (b.getCenter() - a.getCenter()) / std::sqrt(distanceBetweenCenters2);

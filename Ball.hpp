@@ -5,6 +5,7 @@
 
 class Ball {
 public:
+    Ball(Point center, Velocity vel, double radius, Color color, bool isCollidable);
     void setVelocity(const Velocity& velocity);
     Velocity getVelocity() const;
     void draw(Painter& painter) const;
@@ -12,9 +13,12 @@ public:
     Point getCenter() const;
     double getRadius() const;
     double getMass() const;
+    bool isCollidable() const;
 
 private:
     Velocity velocity_;
     Point center_;
     double radius_;
+    Color color_;
+    bool isCollidable_;
 };

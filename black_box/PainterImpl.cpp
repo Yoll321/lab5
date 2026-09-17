@@ -3,6 +3,7 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <algorithm>
+#include <cstdint>
 
 PainterImpl::PainterImpl(sf::RenderWindow& window, const View& view)
     : window{window}, view{view} {
@@ -41,7 +42,7 @@ void PainterImpl::draw(const Point& topLeft, const Point& bottomRight,
 
 sf::Color PainterImpl::toSFMLColor(const Color& color) const {
     auto toColorComponent = [](double value) {
-        return sf::Uint8(std::clamp(value, 0., 1.) * 255);
+        return static_cast<std::uint8_t>(std::clamp(value, 0., 1.) * 255);
     };
 
     return sf::Color{
