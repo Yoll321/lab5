@@ -71,4 +71,4 @@ jobs:
           generate_release_notes: true
           files: |
             artifacts/physics-Linux/*.deb
-            artifacts/phisics-macOS/*.dmg
+            artifacts/physics-macOS/*.dmg

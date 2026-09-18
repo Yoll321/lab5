@@ -45,7 +45,7 @@ target_compile_options(physics PRIVATE
 set(CPACK_PACKAGE_NAME "physics")
 set(CPACK_PACKAGE_VENDOR "nom4")
 set(CPACK_PACKAGE_CONTACT "nom4@tpu.ru")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Alocators application")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Physics application")
 
 if(APPLE)
     set(CPACK_GENERATOR "DragNDrop")
