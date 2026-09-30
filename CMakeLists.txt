@@ -34,7 +34,8 @@ endif ()
 
 add_executable(physics
         main.cpp World.cpp Ball.cpp Physics.cpp Color.cpp Painter.cpp
-        black_box/Application.cpp black_box/View.cpp black_box/PainterImpl.cpp)
+        black_box/Application.cpp black_box/View.cpp black_box/PainterImpl.cpp
+        Dust.cpp)
 target_link_libraries(physics PRIVATE SFML::Graphics)
 
 target_compile_options(physics PRIVATE

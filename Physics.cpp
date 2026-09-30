@@ -11,16 +11,16 @@ void Physics::setWorldBox(const Point& topLeft, const Point& bottomRight) {
     this->bottomRight = bottomRight;
 }
 
-void Physics::update(std::vector<Ball>& balls, const size_t ticks) const {
+void Physics::update(std::vector<Ball>& balls, const size_t ticks, Dust& dustHandler) const {
 
     for (size_t i = 0; i < ticks; ++i) {
         move(balls);
         collideWithBox(balls);
-        collideBalls(balls);
+        collideBalls(balls, dustHandler);
     }
 }
 
-void Physics::collideBalls(std::vector<Ball>& balls) const {
+void Physics::collideBalls(std::vector<Ball>& balls, Dust& dustHandler) const {
     for (auto a = balls.begin(); a != balls.end(); ++a) {
         for (auto b = std::next(a); b != balls.end(); ++b) {
             const double distanceBetweenCenters2 =
@@ -30,7 +30,7 @@ void Physics::collideBalls(std::vector<Ball>& balls) const {
                 collisionDistance * collisionDistance;
 
             if (distanceBetweenCenters2 < collisionDistance2) {
-                processCollision(*a, *b, distanceBetweenCenters2);
+                processCollision(*a, *b, distanceBetweenCenters2, dustHandler);
             }
         }
     }
@@ -67,7 +67,8 @@ void Physics::move(std::vector<Ball>& balls) const {
 }
 
 void Physics::processCollision(Ball& a, Ball& b,
-                               double distanceBetweenCenters2) const {
+                               double distanceBetweenCenters2, 
+                               Dust& dustHandler) const {
     if (!a.isCollidable() || !b.isCollidable()) return;
     // нормированный вектор столкновения
     const Point normal =
@@ -76,6 +77,8 @@ void Physics::processCollision(Ball& a, Ball& b,
     // получаем скорость в векторном виде
     const Point aV = a.getVelocity().vector();
     const Point bV = b.getVelocity().vector();
+    const Point collisionPoint = normal * a.getRadius() + a.getCenter();
+    dustHandler.addParticles(collisionPoint);
 
     // коэффициент p учитывает скорость обоих мячей
     const double p =
